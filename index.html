@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Informe de Altares</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #b0d4f1, #ffffff);
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      font-size: 24px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #f5a623;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e69520;
+    }
+    footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Informe de Altares</h1>
+    <form id="formulario">
+      <label for="familia">Familia:</label>
+      <input type="text" id="familia" name="familia" required>
+
+      <label for="fecha">Fecha:</label>
+      <input type="date" id="fecha" name="fecha" required>
+
+      <label for="adultos">Adultos:</label>
+      <input type="number" id="adultos" name="adultos" required>
+
+      <label for="ninos">Niños:</label>
+      <input type="number" id="ninos" name="ninos" required>
+
+      <label for="ofrendas">Ofrendas:</label>
+      <input type="text" id="ofrendas" name="ofrendas" required>
+
+      <label for="oracion">Petición de oración:</label>
+      <textarea id="oracion" name="oracion" rows="3"></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+    <footer>Yo y mi casa serviremos a Jehová - Josué 24:15</footer>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxXxR5zR4TLCgNgMnkoJBRcPkzEkvw_TeI-J9vzEREeu9EOeqKGTbb8NBK7jce29TDU/exec';
+    const form = document.getElementById('formulario');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => alert('Formulario enviado correctamente'))
+        .catch(error => alert('Error al enviar el formulario'));
+    });
+  </script>
+</body>
+</html>
