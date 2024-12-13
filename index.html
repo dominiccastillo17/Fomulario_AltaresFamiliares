@@ -82,14 +82,42 @@
   </div>
 
   <script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyoASumPm9SV-YxOaqOROXVtbjBENIomo49ZsvOmMF5M6jRLKs4relPRY0CdL6L4rU/exec';
+    const APP_ID = '2EDCC418-ADC6-48F1-87A5-272FFAA96FC6'; // Reemplazá por tu APP_ID
+    const REST_KEY = 'BA64AEFF-908D-4825-82D7-AFB696609559'; // Reemplazá por tu REST_KEY
+    const API_URL = https://api.backendless.com/${APP_ID}/${REST_KEY}/data/Formulario;
+
     const form = document.getElementById('formulario');
 
     form.addEventListener('submit', e => {
       e.preventDefault();
-      fetch(scriptURL, { method: 'name', body: new FormData(form) })
-        .then(response => alert('Formulario enviado correctamente'))
-        .catch(error => alert('Error al enviar el formulario'));
+
+      const datos = {
+        familia: document.getElementById('familia').value,
+        fecha: document.getElementById('fecha').value,
+        adultos: parseInt(document.getElementById('adultos').value, 10),
+        ninos: parseInt(document.getElementById('ninos').value, 10),
+        ofrendas: document.getElementById('ofrendas').value,
+        oracion: document.getElementById('oracion').value
+      };
+
+      fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datos)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('Formulario enviado correctamente');
+          form.reset();
+        } else {
+          throw new Error('Error en el envío');
+        }
+      })
+      .catch(error => {
+        alert('Hubo un problema al enviar el formulario: ' + error.message);
+      });
     });
   </script>
 </body>
