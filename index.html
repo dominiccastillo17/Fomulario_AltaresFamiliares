@@ -358,7 +358,14 @@
                             </div>
 
                             <div class="form-section">
-                                <p class="section-title"><span class="section-num">3</span> Observaciones <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
+                                <p class="section-title"><span class="section-num">3</span> Ofrendas</p>
+                                <label class="lbl">Ofrenda total recibida (C$) *</label>
+                                <input type="number" inputmode="decimal" name="ofrenda" required min="0" step="0.01" value="0" class="field" placeholder="0.00">
+                                <p class="hint">Escribe el total de la ofrenda en córdobas. Si no hubo ofrenda, deja 0.</p>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">4</span> Observaciones <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
                                 <textarea name="observaciones" rows="3" maxlength="1000" placeholder="Testimonios, visitas, necesidades..." class="field"></textarea>
                             </div>
 
@@ -398,7 +405,14 @@
                             </div>
 
                             <div class="form-section">
-                                <p class="section-title"><span class="section-num">3</span> Peticiones o testimonios <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
+                                <p class="section-title"><span class="section-num">3</span> Ofrendas</p>
+                                <label class="lbl">Ofrenda total recibida (C$) *</label>
+                                <input type="number" inputmode="decimal" name="ofrenda" required min="0" step="0.01" value="0" class="field" placeholder="0.00">
+                                <p class="hint">Escribe el total de la ofrenda en córdobas. Si no hubo ofrenda, deja 0.</p>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">4</span> Peticiones o testimonios <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
                                 <textarea name="observaciones" rows="3" maxlength="1000" placeholder="¿Qué quiere compartir la familia?" class="field"></textarea>
                             </div>
 
@@ -830,11 +844,13 @@
             const data = getSafeFormData(form);
 
             let rows;
+            const ofrendaNum = Math.max(0, Number(data.ofrenda || 0));
+            const ofrendaTexto = 'C$ ' + ofrendaNum.toLocaleString('es-NI', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             if (tipo === 'Células') {
                 const total = (parseInt(data.asistencia_adultos, 10) || 0) + (parseInt(data.asistencia_ninos, 10) || 0);
-                rows = [['Fecha', fmtDate(data.fecha)], ['Líder', data.lider], ['Adultos', data.asistencia_adultos], ['Niños', data.asistencia_ninos], ['Total', total + ' personas'], ['Observaciones', data.observaciones || '—']];
+                rows = [['Fecha', fmtDate(data.fecha)], ['Líder', data.lider], ['Adultos', data.asistencia_adultos], ['Niños', data.asistencia_ninos], ['Total', total + ' personas'], ['Ofrenda total', ofrendaTexto], ['Observaciones', data.observaciones || '—']];
             } else {
-                rows = [['Fecha de inicio', fmtDate(data.fecha)], ['Familia', data.familia], ['Días realizados', data.dias], ['Peticiones/Testimonios', data.observaciones || '—']];
+                rows = [['Fecha de inicio', fmtDate(data.fecha)], ['Familia', data.familia], ['Días realizados', data.dias], ['Ofrenda total', ofrendaTexto], ['Peticiones/Testimonios', data.observaciones || '—']];
             }
             const body = '<p class="mb-3">Revisa que los datos estén correctos:</p><dl class="space-y-2">' +
                 rows.map(r => `<div class="flex justify-between gap-4 border-b border-gray-100 dark:border-gray-700 pb-1"><dt class="font-bold text-gray-500 dark:text-gray-400">${esc(r[0])}</dt><dd class="text-right text-gray-900 dark:text-white break-words max-w-[60%]">${esc(r[1])}</dd></div>`).join('') + '</dl>';
