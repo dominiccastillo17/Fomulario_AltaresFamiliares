@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iglesia de Dios de la Profecía - Chinandega</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        cream: {
+                            DEFAULT: '#faf8f5',
+                            dark: '#e8e4db'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            background-image: radial-gradient(circle at 50% 0%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
+            background-attachment: fixed;
+            color: #0f172a;
+            transition: background 0.3s ease;
+        }
+        .dark body {
+            background-color: #020617;
+            background-image: radial-gradient(circle at 50% 0%, #0f172a 0%, #020617 50%, #000000 100%);
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .glass-nav {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .dark .glass-nav { background: rgba(15, 23, 42, 0.95); border-bottom: 2px solid #1e293b; }
+        .bottom-bar { border-bottom: 0; border-top: 2px solid #e5e7eb; padding-bottom: env(safe-area-inset-bottom); }
+        .dark .bottom-bar { border-top: 2px solid #1e293b; }
+
+        .content-card {
+            background-color: #faf8f5;
+            border-top-left-radius: 2rem;
+            border-top-right-radius: 2rem;
+            min-height: calc(100vh - 4rem);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease;
+        }
+        .dark .content-card { background-color: #1e293b; }
+
+        .view-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .view-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .dynamic-logo { filter: invert(1) contrast(120%); transition: all 0.3s ease; }
+        .dark .dynamic-logo { filter: invert(0); }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px dashed #2563eb;
+            margin-bottom: 2rem;
+        }
+        .dark .timeline-item { border-left-color: #3b82f6; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.45rem;
+            top: 0;
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background-color: #2563eb;
+            border: 2px solid #faf8f5;
+        }
+        .dark .timeline-item::before { border-color: #1e293b; background-color: #3b82f6; }
+
+        /* Navegación activa */
+        .nav-link.active, .bn.active { color: #2563eb; }
+        .dark .nav-link.active, .dark .bn.active { color: #60a5fa; }
+        .bn { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0.55rem 0; font-size: 0.65rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #6b7280; }
+        .dark .bn { color: #9ca3af; }
+
+        /* Formularios */
+        .field { width: 100%; padding: .75rem 1rem; background: #fff; border: 1px solid #d1d5db; border-radius: .75rem; color: #111827; font-size: 1rem; outline: none; transition: .2s; }
+        .field:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.2); }
+        .field::placeholder { color: #9ca3af; }
+        .dark .field { background: #0f172a; border-color: #334155; color: #fff; }
+        .lbl { display: block; font-size: .75rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: #6b7280; margin-bottom: .4rem; }
+        .dark .lbl { color: #9ca3af; }
+        .hint { font-size: .75rem; color: #6b7280; margin-top: .3rem; }
+        .dark .hint { color: #9ca3af; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .75rem 1.25rem; border-radius: .75rem; font-weight: 700; font-size: .8rem; letter-spacing: .05em; text-transform: uppercase; transition: .2s; cursor: pointer; }
+        .btn:disabled { opacity: .6; cursor: not-allowed; }
+        .btn-primary { background: #2563eb; color: #fff; }
+        .btn-primary:hover:not(:disabled) { background: #1d4ed8; }
+        .btn-dark { background: #111827; color: #fff; }
+        .btn-dark:hover:not(:disabled) { background: #000; }
+        .dark .btn-dark { background: #f3f4f6; color: #111827; }
+        .btn-ghost { background: transparent; color: #4b5563; border: 1px solid #d1d5db; }
+        .btn-ghost:hover:not(:disabled) { background: #f3f4f6; }
+        .dark .btn-ghost { color: #d1d5db; border-color: #475569; }
+        .dark .btn-ghost:hover:not(:disabled) { background: #334155; }
+        .btn-danger { background: #fee2e2; color: #b91c1c; }
+        .btn-danger:hover:not(:disabled) { background: #fecaca; }
+        .dark .btn-danger { background: rgba(185,28,28,.25); color: #fca5a5; }
+        .btn-sm { padding: .45rem .8rem; font-size: .7rem; border-radius: .6rem; }
+
+        .badge { display: inline-flex; align-items: center; gap: .25rem; padding: .15rem .6rem; border-radius: 9999px; font-size: .7rem; font-weight: 700; }
+        .badge-green { background: #dcfce7; color: #166534; }
+        .badge-amber { background: #fef3c7; color: #92400e; }
+        .badge-gray { background: #e5e7eb; color: #374151; }
+        .dark .badge-green { background: rgba(22,101,52,.4); color: #86efac; }
+        .dark .badge-amber { background: rgba(146,64,14,.4); color: #fcd34d; }
+        .dark .badge-gray { background: #334155; color: #d1d5db; }
+
+        /* Tarjetas selectoras de informe */
+        .report-card { text-align: left; padding: 1rem; border-radius: 1rem; border: 2px solid #e5e7eb; background: #fff; transition: .2s; cursor: pointer; }
+        .dark .report-card { background: #0f172a; border-color: #334155; }
+        .report-card:hover { border-color: #93c5fd; }
+        .report-card.active { border-color: #2563eb; background: #eff6ff; box-shadow: 0 4px 14px rgba(37,99,235,.15); }
+        .dark .report-card.active { background: rgba(30,58,138,.35); border-color: #3b82f6; }
+        .step-btn { flex: none; width: 3rem; height: 3rem; border-radius: .75rem; background: #e5e7eb; color: #111827; font-size: 1.5rem; font-weight: 700; line-height: 1; }
+        .step-btn:hover { background: #d1d5db; }
+        .dark .step-btn { background: #334155; color: #fff; }
+        .form-section { background: #fff; border: 1px solid #e5e7eb; border-radius: 1rem; padding: 1.25rem; }
+        .dark .form-section { background: rgba(15,23,42,.6); border-color: #334155; }
+        .section-title { display: flex; align-items: center; gap: .6rem; font-weight: 800; color: #111827; margin-bottom: 1rem; }
+        .dark .section-title { color: #fff; }
+        .section-num { width: 1.6rem; height: 1.6rem; border-radius: 9999px; background: #2563eb; color: #fff; font-size: .8rem; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+
+        .admin-card { display: flex; gap: 1rem; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 1rem; background: #fff; }
+        .dark .admin-card { background: #0f172a; border-color: #334155; }
+        .stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 1rem; padding: .9rem 1rem; }
+        .dark .stat { background: #0f172a; border-color: #334155; }
+
+        /* Tutorial */
+        .tour-highlight { outline: 3px solid #f59e0b; outline-offset: 4px; border-radius: .75rem; transition: outline .2s; }
+        #tour { bottom: calc(5rem + env(safe-area-inset-bottom)); left: 1rem; right: 1rem; }
+        @media (min-width: 768px) { #tour { bottom: 1.5rem; left: auto; right: 1.5rem; width: 24rem; } }
+        .tour-dot { width: .5rem; height: .5rem; border-radius: 9999px; background: #d1d5db; transition: .2s; }
+        .dark .tour-dot { background: #475569; }
+        .tour-dot.on { background: #2563eb; width: 1.25rem; }
+
+        /* Toasts */
+        #toast-container { position: fixed; top: 5.5rem; right: 1rem; left: 1rem; z-index: 80; display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; pointer-events: none; }
+        .toast { pointer-events: auto; padding: 1rem; border-radius: 0.75rem; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.25); display: flex; align-items: center; gap: 0.75rem; transform: translateX(120%); animation: slideIn 0.3s forwards; max-width: 24rem; }
+        .dark .toast { background: #334155; color: white; }
+        .toast.success { border-left: 4px solid #10b981; }
+        .toast.error { border-left: 4px solid #ef4444; }
+        @keyframes slideIn { to { transform: translateX(0); } }
+        @keyframes slideOut { to { transform: translateX(120%); opacity: 0; } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Navbar superior -->
+    <nav class="glass-nav fixed w-full z-40 top-0 transition-colors duration-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 sm:h-20">
+                <div class="flex items-center cursor-pointer" onclick="navigate('home')">
+                    <img src="1000368081.png" alt="IDP Chinandega" class="dynamic-logo h-10 sm:h-12 w-auto object-contain"
+                         onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'IDP Chinandega',className:'font-display font-black text-brand-600 text-lg'}))">
+                </div>
+
+                <div id="nav-desktop" class="hidden md:flex items-center space-x-8">
+                    <a href="#" data-nav="home" onclick="navigate('home'); return false;" class="nav-link text-sm tracking-widest uppercase font-bold text-gray-800 dark:text-gray-200 hover:text-brand-600 dark:hover:text-brand-500 transition">Inicio</a>
+                    <a href="#" data-nav="reports" onclick="navigate('reports'); return false;" class="nav-link text-sm tracking-widest uppercase font-bold text-gray-800 dark:text-gray-200 hover:text-brand-600 dark:hover:text-brand-500 transition">Informes</a>
+                    <a href="#" data-nav="prayer" onclick="navigate('prayer'); return false;" class="nav-link text-sm tracking-widest uppercase font-bold text-gray-800 dark:text-gray-200 hover:text-brand-600 dark:hover:text-brand-500 transition">Oración</a>
+
+                    <button onclick="startTour()" title="Ver tutorial" aria-label="Ver tutorial" class="text-gray-800 dark:text-gray-200 hover:text-brand-600 transition p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i class="ph ph-question text-xl"></i>
+                    </button>
+                    <button onclick="toggleTheme()" aria-label="Cambiar tema" class="text-gray-800 dark:text-gray-200 hover:text-brand-600 transition p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
+                        <i id="theme-icon" class="ph ph-moon text-xl"></i>
+                    </button>
+                    <a href="#" data-nav="admin" onclick="navigate('admin-login'); return false;" title="Portal administrativo" class="nav-link text-gray-400 dark:text-gray-500 hover:text-brand-600 transition"><i class="ph ph-lock-key text-xl"></i></a>
+                </div>
+
+                <div class="flex items-center md:hidden space-x-1">
+                    <button onclick="startTour()" aria-label="Ver tutorial" class="p-2 text-gray-800 dark:text-gray-200 focus:outline-none">
+                        <i class="ph ph-question text-2xl"></i>
+                    </button>
+                    <button onclick="toggleTheme()" aria-label="Cambiar tema" class="p-2 text-gray-800 dark:text-gray-200 focus:outline-none">
+                        <i id="theme-icon-mobile" class="ph ph-moon text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navegación inferior (celulares) -->
+    <nav id="bottom-nav" class="glass-nav bottom-bar md:hidden fixed bottom-0 inset-x-0 z-40">
+        <div class="grid grid-cols-4">
+            <button class="bn" data-nav="home" onclick="navigate('home')"><i class="ph ph-house text-2xl"></i>Inicio</button>
+            <button class="bn" data-nav="reports" onclick="navigate('reports')"><i class="ph ph-clipboard-text text-2xl"></i>Informes</button>
+            <button class="bn" data-nav="prayer" onclick="navigate('prayer')"><i class="ph ph-hands-praying text-2xl"></i>Oración</button>
+            <button class="bn" data-nav="admin" onclick="navigate('admin-login')"><i class="ph ph-lock-key text-2xl"></i>Admin</button>
+        </div>
+    </nav>
+
+    <!-- Espaciador del Navbar -->
+    <div class="h-20 sm:h-24"></div>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow max-w-5xl mx-auto w-full px-2 sm:px-6 lg:px-8 mb-0">
+        <div class="content-card w-full pt-10 sm:pt-12 pb-28 md:pb-24 px-5 sm:px-12 relative overflow-hidden">
+
+            <div class="absolute top-6 left-6 right-6 sm:left-12 sm:right-12 h-px bg-gray-300 dark:bg-gray-700"></div>
+
+            <!-- Vista: Inicio -->
+            <div id="view-home" class="view-section active">
+
+                <div class="mb-12">
+                    <p class="text-brand-600 dark:text-brand-500 font-bold tracking-[0.2em] text-xs sm:text-sm uppercase mb-4 flex justify-between items-center">
+                        <span>IDP Chinandega • Portal</span>
+                        <span id="current-date" class="text-gray-500 dark:text-gray-400"></span>
+                    </p>
+                    <h1 class="font-display text-5xl sm:text-7xl font-black text-brand-600 dark:text-white leading-none tracking-tight mb-4">
+                        Conectados.
+                    </h1>
+                    <p class="text-lg sm:text-2xl text-gray-700 dark:text-gray-300 font-medium italic mb-8">
+                        Una iglesia para ser transformados en fe y comunidad.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 sm:gap-4">
+                        <button onclick="navigate('reports')" class="px-6 sm:px-8 py-3 bg-brand-600 text-white font-bold tracking-wider uppercase rounded-full hover:bg-brand-700 shadow-lg transition transform hover:-translate-y-1 text-sm">
+                            <i class="ph ph-clipboard-text mr-1"></i> Enviar Informe
+                        </button>
+                        <button onclick="navigate('prayer')" class="px-6 sm:px-8 py-3 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-bold tracking-wider uppercase rounded-full hover:bg-black dark:hover:bg-white shadow-lg transition transform hover:-translate-y-1 text-sm">
+                            <i class="ph ph-hands-praying mr-1"></i> Oración
+                        </button>
+                    </div>
+                </div>
+
+                <div id="home-info" class="grid grid-cols-1 md:grid-cols-12 gap-12 mt-12">
+
+                    <!-- Columna Izquierda (Eventos) -->
+                    <div class="md:col-span-7 space-y-12">
+
+                        <div>
+                            <h2 class="text-sm font-bold tracking-widest uppercase text-gray-400 mb-6 flex items-center">
+                                <span class="w-8 h-px bg-gray-400 mr-4"></span> Próximos Eventos
+                            </h2>
+                            <div id="public-event-container">
+                                <div class="timeline-item"><div class="animate-pulse space-y-3"><div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div><div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div></div></div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha (Noticias) -->
+                    <div class="md:col-span-5">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+                            <h2 class="font-display text-2xl font-black text-brand-600 dark:text-brand-500 mb-6">Noticias y Anuncios</h2>
+                            <div id="public-news-container" class="space-y-6">
+                                <div class="animate-pulse space-y-3"><div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-3/4"></div><div class="h-4 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Vista: Informes (Células y Altares) -->
+            <div id="view-reports" class="view-section">
+                <div class="max-w-2xl mx-auto">
+                    <p class="text-brand-600 dark:text-brand-500 font-bold tracking-[0.2em] text-xs uppercase mb-2 text-center">Gestión Interna</p>
+                    <h2 class="font-display text-4xl sm:text-5xl font-black text-gray-900 dark:text-white text-center mb-3">Informes</h2>
+                    <p class="text-center text-gray-600 dark:text-gray-400 mb-8">Elige el tipo de informe, llena los datos y envíalo. Siempre podrás revisar antes de enviar.</p>
+
+                    <!-- Selector de tipo -->
+                    <div id="report-type-cards" class="grid grid-cols-2 gap-3 mb-8">
+                        <button type="button" onclick="switchTab('tab-celula')" id="btn-tab-celula" class="report-card active" aria-pressed="true">
+                            <i class="ph-fill ph-users-three text-3xl text-brand-600 dark:text-brand-500"></i>
+                            <p class="font-bold text-gray-900 dark:text-white mt-2">Célula</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Reunión del grupo</p>
+                        </button>
+                        <button type="button" onclick="switchTab('tab-altar')" id="btn-tab-altar" class="report-card" aria-pressed="false">
+                            <i class="ph-fill ph-house-line text-3xl text-brand-600 dark:text-brand-500"></i>
+                            <p class="font-bold text-gray-900 dark:text-white mt-2">Altar Familiar</p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Devocional en el hogar</p>
+                        </button>
+                    </div>
+
+                    <div id="report-forms">
+                        <!-- Formulario Células -->
+                        <form id="form-celula" onsubmit="submitReport(event, 'Células')" class="space-y-5">
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">1</span> ¿Cuándo y quién dirigió?</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="lbl">Fecha de la reunión *</label>
+                                        <input type="date" name="fecha" required class="field">
+                                    </div>
+                                    <div>
+                                        <label class="lbl">Líder *</label>
+                                        <input type="text" name="lider" required maxlength="100" placeholder="Nombre del líder" class="field">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">2</span> ¿Cuántas personas asistieron?</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="lbl">Adultos *</label>
+                                        <div class="flex items-center gap-2">
+                                            <button type="button" class="step-btn" aria-label="Restar adulto" onclick="stepNum('asistencia_adultos', -1)">−</button>
+                                            <input type="number" inputmode="numeric" name="asistencia_adultos" required min="0" value="0" oninput="updateTotal()" class="field text-center text-xl font-bold">
+                                            <button type="button" class="step-btn" aria-label="Sumar adulto" onclick="stepNum('asistencia_adultos', 1)">+</button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="lbl">Niños *</label>
+                                        <div class="flex items-center gap-2">
+                                            <button type="button" class="step-btn" aria-label="Restar niño" onclick="stepNum('asistencia_ninos', -1)">−</button>
+                                            <input type="number" inputmode="numeric" name="asistencia_ninos" required min="0" value="0" oninput="updateTotal()" class="field text-center text-xl font-bold">
+                                            <button type="button" class="step-btn" aria-label="Sumar niño" onclick="stepNum('asistencia_ninos', 1)">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 flex items-center justify-between bg-brand-50 dark:bg-brand-900/30 rounded-xl px-4 py-3">
+                                    <span class="text-sm font-bold text-brand-800 dark:text-brand-100">Total de asistentes</span>
+                                    <span id="total-asistentes" class="font-display text-2xl font-black text-brand-600 dark:text-brand-500">0</span>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">3</span> Observaciones <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
+                                <textarea name="observaciones" rows="3" maxlength="1000" placeholder="Testimonios, visitas, necesidades..." class="field"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-full py-4 text-sm shadow-lg">
+                                <i class="ph ph-paper-plane-tilt text-lg"></i> Revisar y enviar informe de célula
+                            </button>
+                        </form>
+
+                        <!-- Formulario Altares -->
+                        <form id="form-altar" onsubmit="submitReport(event, 'Altares')" class="space-y-5 hidden">
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">1</span> ¿Qué familia y cuándo comenzó?</p>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="lbl">Fecha de inicio *</label>
+                                        <input type="date" name="fecha" required class="field">
+                                    </div>
+                                    <div>
+                                        <label class="lbl">Familia *</label>
+                                        <input type="text" name="familia" required maxlength="100" placeholder="Ej. Familia López" class="field">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">2</span> ¿Cuántos días realizaron el altar?</p>
+                                <div class="grid grid-cols-7 gap-2">
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="1" class="peer sr-only" checked><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">1</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="2" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">2</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="3" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">3</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="4" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">4</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="5" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">5</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="6" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">6</span></label>
+                                    <label class="cursor-pointer"><input type="radio" name="dias" value="7" class="peer sr-only"><span class="flex items-center justify-center h-12 rounded-xl border-2 border-gray-300 dark:border-gray-600 font-bold text-gray-700 dark:text-gray-200 peer-checked:bg-brand-600 peer-checked:border-brand-600 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-brand-500">7</span></label>
+                                </div>
+                                <p class="hint">Toca el número de días (del 1 al 7).</p>
+                            </div>
+
+                            <div class="form-section">
+                                <p class="section-title"><span class="section-num">3</span> Peticiones o testimonios <span class="text-xs font-medium text-gray-400">(opcional)</span></p>
+                                <textarea name="observaciones" rows="3" maxlength="1000" placeholder="¿Qué quiere compartir la familia?" class="field"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-dark w-full py-4 text-sm shadow-lg">
+                                <i class="ph ph-paper-plane-tilt text-lg"></i> Revisar y enviar informe de altar
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Confirmación de envío -->
+                    <div id="report-success" class="hidden text-center py-10">
+                        <i class="ph-fill ph-check-circle text-7xl text-green-500"></i>
+                        <h3 class="font-display text-2xl font-black text-gray-900 dark:text-white mt-4">¡Informe enviado!</h3>
+                        <p id="report-success-text" class="text-gray-600 dark:text-gray-400 mt-2 mb-6">Tu informe se guardó correctamente.</p>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <button type="button" onclick="resetReportView()" class="btn btn-primary">Enviar otro informe</button>
+                            <button type="button" onclick="navigate('home')" class="btn btn-ghost">Volver al inicio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vista: Oración -->
+            <div id="view-prayer" class="view-section">
+                <div class="max-w-xl mx-auto text-center">
+                    <i class="ph-fill ph-hands-praying text-6xl text-brand-600 dark:text-brand-500 mb-4"></i>
+                    <h2 class="font-display text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">Oración</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-10 italic">Una iglesia que ora, es una iglesia fuerte. Comparte tu carga confidencialmente.</p>
+
+                    <form onsubmit="submitPrayer(event)" class="text-left space-y-5">
+                        <div>
+                            <label class="lbl">Nombre (opcional)</label>
+                            <input type="text" name="nombre" maxlength="100" placeholder="Puedes dejarlo vacío para ser anónimo" class="field">
+                        </div>
+                        <div>
+                            <label class="lbl">Teléfono o correo (opcional)</label>
+                            <input type="text" name="contacto" maxlength="100" placeholder="Solo si deseas que te contactemos" class="field">
+                        </div>
+                        <div>
+                            <label class="lbl">Motivo de oración *</label>
+                            <textarea name="motivo" required rows="5" maxlength="1000" oninput="document.getElementById('prayer-count').textContent=this.value.length" class="field"></textarea>
+                            <p class="hint text-right"><span id="prayer-count">0</span>/1000</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full py-4 text-sm shadow-lg">
+                            <i class="ph ph-paper-plane-tilt text-lg"></i> Enviar Petición
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Vista: Admin Login -->
+            <div id="view-admin-login" class="view-section">
+                <div class="max-w-sm mx-auto py-12 text-center">
+                    <i class="ph ph-shield-check text-5xl text-gray-400 dark:text-gray-600 mb-4"></i>
+                    <h2 class="font-display text-3xl font-black text-gray-900 dark:text-white mb-2">Acceso Admin</h2>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-8">Solo para personal autorizado.</p>
+                    <form onsubmit="handleLogin(event)" class="space-y-4">
+                        <input type="text" id="admin-user" required placeholder="Usuario" autocomplete="username" class="field">
+                        <div class="relative">
+                            <input type="password" id="admin-pass" required placeholder="Contraseña" autocomplete="current-password" class="field pr-12">
+                            <button type="button" onclick="togglePass()" aria-label="Mostrar u ocultar contraseña" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"><i id="pass-icon" class="ph ph-eye text-xl"></i></button>
+                        </div>
+                        <button type="submit" id="btn-login" class="btn btn-dark w-full py-4 shadow-lg">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Vista: Panel Admin -->
+            <div id="view-admin-panel" class="view-section">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+                    <div>
+                        <h2 class="font-display text-3xl font-black text-gray-900 dark:text-white">Panel de Control</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Administra el contenido de la página y consulta los registros.</p>
+                    </div>
+                    <button onclick="logout()" class="btn btn-danger btn-sm"><i class="ph ph-sign-out text-lg"></i> Salir del sistema</button>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <!-- Tabs Admin -->
+                    <div id="admin-tabs" class="flex overflow-x-auto border-b border-gray-200 dark:border-gray-700 no-scrollbar"></div>
+
+                    <div id="admin-action-bar" class="bg-gray-50 dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700 flex flex-col sm:flex-row sm:items-center gap-3">
+                        <div class="flex-1 min-w-0">
+                            <span id="admin-action-title" class="font-bold text-gray-800 dark:text-gray-100 block"></span>
+                            <span id="admin-action-help" class="text-xs text-gray-500 dark:text-gray-400"></span>
+                        </div>
+                        <input type="search" id="admin-search" oninput="renderAdmin()" placeholder="Buscar..." class="field sm:w-56 !py-2 text-sm">
+                        <button id="admin-add-btn" onclick="toggleAdminForm()" class="btn btn-primary btn-sm hidden"><i class="ph ph-plus-circle text-lg"></i> <span id="admin-add-label">Añadir</span></button>
+                    </div>
+
+                    <div id="admin-form-wrapper" class="hidden p-5 sm:p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"></div>
+
+                    <div id="admin-summary" class="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4"></div>
+
+                    <div id="admin-list" class="p-4 pt-0"></div>
+                </div>
+            </div>
+
+            <!-- Footer interno -->
+            <div class="mt-20 pt-8 border-t border-gray-300 dark:border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-xs font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400 text-center md:text-right w-full">
+                    © <span id="year"></span> Departamento de Comunicaciones - IDP Chinandega
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Tutorial de bienvenida (no bloquea el sistema) -->
+    <div id="tour" class="hidden fixed z-[60] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-600 p-5" role="dialog" aria-label="Tutorial de bienvenida" aria-live="polite">
+        <div class="flex items-center justify-between mb-3">
+            <span id="tour-step" class="text-xs font-bold tracking-widest uppercase text-brand-600 dark:text-brand-500"></span>
+            <button onclick="endTour()" class="text-xs font-bold uppercase tracking-wider text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">Omitir ✕</button>
+        </div>
+        <div class="flex gap-3 items-start">
+            <div class="flex-none w-11 h-11 rounded-xl bg-brand-50 dark:bg-brand-900/40 flex items-center justify-center"><i id="tour-icon" class="ph-fill ph-hand-waving text-2xl text-brand-600 dark:text-brand-500"></i></div>
+            <div>
+                <h3 id="tour-title" class="font-display font-black text-lg text-gray-900 dark:text-white leading-tight mb-1"></h3>
+                <p id="tour-text" class="text-sm text-gray-600 dark:text-gray-300"></p>
+            </div>
+        </div>
+        <div id="tour-dots" class="flex items-center justify-center gap-1.5 my-4"></div>
+        <div class="flex justify-between gap-3">
+            <button id="tour-prev" onclick="tourPrev()" class="btn btn-ghost btn-sm"><i class="ph ph-arrow-left"></i> Anterior</button>
+            <button id="tour-next" onclick="tourNext()" class="btn btn-primary btn-sm">Siguiente <i class="ph ph-arrow-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Diálogo de confirmación -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-[70] flex items-end sm:items-center justify-center bg-black/50 p-4" onclick="if(event.target===this) closeConfirm(false)">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl w-full max-w-md p-6 shadow-2xl" role="alertdialog" aria-modal="true">
+            <div id="confirm-icon" class="mb-3"></div>
+            <h3 id="confirm-title" class="font-display text-xl font-black text-gray-900 dark:text-white mb-2"></h3>
+            <div id="confirm-body" class="text-sm text-gray-600 dark:text-gray-300"></div>
+            <div class="flex gap-3 mt-6">
+                <button id="confirm-cancel" onclick="closeConfirm(false)" class="btn btn-ghost flex-1"></button>
+                <button id="confirm-ok" onclick="closeConfirm(true)" class="btn btn-primary flex-1"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script>
+        // Compatibilidad con Google Apps Script HtmlService (modo IFRAME):
+        // evita la navegación normal de formularios, sin impedir que sus manejadores
+        // actuales (submitReport, submitPrayer, handleLogin, submitAdminContent) se ejecuten.
+        // Al ser delegado en document, también cubre formularios creados dinámicamente.
+        document.addEventListener('submit', function (event) {
+            event.preventDefault();
+        }, true);
+
+        // --- UTILIDADES ---
+        const $ = id => document.getElementById(id);
+        const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        const safeUrl = u => /^https?:\/\//i.test(String(u || '').trim()) ? String(u).trim() : '';
+        const isoRe = /^\d{4}-\d{2}-\d{2}$/;
+        const errMsg = e => (e && e.message ? String(e.message).replace(/^Error:\s*/, '') : 'Ocurrió un error. Inténtalo de nuevo.');
+
+        function imgUrl(u) {
+            const url = safeUrl(u);
+            if (!url) return '';
+            const m = url.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?(?:export=\w+&)?id=)([\w-]+)/);
+            return m ? `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1000` : url;
+        }
+        function todayISO() {
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        }
+        function fmtDate(s) {
+            if (!isoRe.test(s || '')) return s || '';
+            const [y, m, d] = s.split('-').map(Number);
+            return new Date(y, m - 1, d).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+        }
+        function daysUntil(s) {
+            const [y, m, d] = s.split('-').map(Number);
+            const t = new Date(); t.setHours(0, 0, 0, 0);
+            return Math.round((new Date(y, m - 1, d) - t) / 86400000);
+        }
+        function daysLabel(s) {
+            if (!isoRe.test(s || '')) return 'Próximamente';
+            const n = daysUntil(s);
+            if (n <= 0) return 'Hoy';
+            if (n === 1) return 'Mañana';
+            if (n <= 7) return `En ${n} días`;
+            return 'Próximamente';
+        }
+
+        const formatCurrentDate = () => {
+            const today = new Date();
+            const dateEl = $('current-date');
+            if(dateEl) dateEl.textContent = today.toLocaleDateString('es-ES', { year: 'numeric', month: 'numeric', day: 'numeric' }).replace(/\//g, ' • ');
+            const yearEl = $('year');
+            if(yearEl) yearEl.textContent = today.getFullYear();
+        };
+
+        // Extrae los datos del formulario de forma compatible con Google
+        function getSafeFormData(formElement) {
+            const data = {};
+            new FormData(formElement).forEach((value, key) => { data[key] = value; });
+            return data;
+        }
+
+        // --- SISTEMA DE TEMA (CLARO/OSCURO) ---
+        function toggleTheme() {
+            const html = document.documentElement;
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+            updateThemeIcons(isDark);
+        }
+
+        function updateThemeIcons(isDark) {
+            const iconDesktop = $('theme-icon');
+            const iconMobile = $('theme-icon-mobile');
+            if (isDark) {
+                if(iconDesktop) iconDesktop.className = "ph-fill ph-sun text-xl text-yellow-400";
+                if(iconMobile) iconMobile.className = "ph-fill ph-sun text-2xl text-yellow-400";
+            } else {
+                if(iconDesktop) iconDesktop.className = "ph ph-moon text-xl text-gray-800";
+                if(iconMobile) iconMobile.className = "ph ph-moon text-2xl text-gray-800";
+            }
+        }
+
+        function initTheme() {
+            let savedTheme = null;
+            try { savedTheme = localStorage.getItem('theme'); } catch (e) {}
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+            if (isDark) document.documentElement.classList.add('dark');
+            updateThemeIcons(isDark);
+        }
+
+        // --- LÓGICA GENERAL ---
+        let currentView = 'home';
+        let isAdmin = false;
+        let adminToken = null;
+
+        function showToast(message, type = 'success') {
+            const container = $('toast-container');
+            if(!container) return;
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? '<i class="ph-fill ph-check-circle text-green-500 text-xl"></i>' : '<i class="ph-fill ph-warning-circle text-red-500 text-xl"></i>';
+            toast.innerHTML = `${icon} <span class="text-sm font-medium">${esc(message)}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideOut 0.3s forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        let confirmResolve = null;
+        function askConfirm(title, bodyHtml, okText = 'Aceptar', danger = false, cancelText = 'Cancelar') {
+            return new Promise(resolve => {
+                confirmResolve = resolve;
+                $('confirm-title').textContent = title;
+                $('confirm-body').innerHTML = bodyHtml;
+                $('confirm-icon').innerHTML = danger
+                    ? '<i class="ph-fill ph-warning text-4xl text-red-500"></i>'
+                    : '<i class="ph-fill ph-question text-4xl text-brand-600"></i>';
+                const ok = $('confirm-ok');
+                ok.textContent = okText;
+                ok.className = 'btn flex-1 ' + (danger ? 'btn-danger' : 'btn-primary');
+                $('confirm-cancel').textContent = cancelText;
+                $('confirm-modal').classList.remove('hidden');
+                ok.focus();
+            });
+        }
+        function closeConfirm(value) {
+            $('confirm-modal').classList.add('hidden');
+            if (confirmResolve) { confirmResolve(value); confirmResolve = null; }
+        }
+
+        function setActiveNav(viewId) {
+            const group = viewId.startsWith('admin') ? 'admin' : viewId;
+            document.querySelectorAll('[data-nav]').forEach(el => el.classList.toggle('active', el.dataset.nav === group));
+        }
+
+        function navigate(viewId) {
+            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+            const viewTarget = $(`view-${viewId}`);
+            if(viewTarget) viewTarget.classList.add('active');
+            
+            currentView = viewId;
+            setActiveNav(viewId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (viewId === 'home') loadPublicData();
+            if (viewId === 'admin-panel' && !isAdmin) { navigate('admin-login'); showToast('Requiere autenticación', 'error'); }
+            if (viewId === 'admin-login' && isAdmin) navigate('admin-panel');
+        }
+
+        // --- CONEXIÓN GITHUB PAGES -> GOOGLE APPS SCRIPT ---
+        // Pega aquí la URL de la aplicación web de Apps Script que termina en /exec.
+        const API_URL = 'https://script.google.com/macros/s/AKfycbxaGCuoqp7wqe4LxcCVFuXZKIE6hdgJShr8aV7YFSIKppObflUtrSXgt0-A4k8itQx6zQ/exec';
+        let jsonpCounter = 0;
+        function callBackend(functionName, args = []) {
+            return new Promise((resolve, reject) => {
+                if (!API_URL || API_URL.indexOf('PEGA_AQUI') !== -1) {
+                    reject(new Error('Falta configurar la URL de Apps Script en index.html.'));
+                    return;
+                }
+                const callbackName = '__idpCallback_' + Date.now() + '_' + (++jsonpCounter);
+                const script = document.createElement('script');
+                let finished = false;
+                const cleanup = () => {
+                    if (script.parentNode) script.parentNode.removeChild(script);
+                    try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+                };
+                const timer = setTimeout(() => {
+                    if (finished) return;
+                    finished = true; cleanup();
+                    reject(new Error('El servidor tardó demasiado. Revisa la URL de Apps Script y su implementación.'));
+                }, 25000);
+                window[callbackName] = payload => {
+                    if (finished) return;
+                    finished = true; clearTimeout(timer); cleanup();
+                    if (payload && payload.ok) resolve(payload.result);
+                    else reject(new Error(payload && payload.error ? payload.error : 'El servidor devolvió una respuesta no válida.'));
+                };
+                const params = new URLSearchParams();
+                params.set('api', '1');
+                params.set('fn', functionName);
+                params.set('args', JSON.stringify(args || []));
+                params.set('callback', callbackName);
+                script.onerror = () => {
+                    if (finished) return;
+                    finished = true; clearTimeout(timer); cleanup();
+                    reject(new Error('No se pudo conectar con Apps Script. Verifica la URL /exec y el acceso de la implementación.'));
+                };
+                script.src = API_URL + (API_URL.indexOf('?') >= 0 ? '&' : '?') + params.toString();
+                document.head.appendChild(script);
+            });
+        }
+
+        // --- DATOS PÚBLICOS ---
+        async function loadPublicData() {
+            try {
+                const res = await callBackend('getPublicContent');
+                renderPublic(res || { eventos: [], noticias: [] });
+            } catch (e) {
+                const retry = '<button onclick="loadPublicData()" class="btn btn-ghost btn-sm mt-2"><i class="ph ph-arrow-clockwise"></i> Reintentar</button>';
+                const msg = `<p class="text-gray-500 dark:text-gray-400 text-sm">No se pudo cargar la información.</p>${retry}`;
+                const evCont = $('public-event-container');
+                if(evCont) evCont.innerHTML = `<div class="timeline-item">${msg}</div>`;
+                const nCont = $('public-news-container');
+                if(nCont) nCont.innerHTML = msg;
+            }
+        }
+
+        function renderPublic(data) {
+            // Eventos
+            const today = todayISO();
+            const evs = (data.eventos || []).filter(e => !isoRe.test(e.fecha) || e.fecha >= today);
+            evs.sort((a, b) => {
+                const ai = isoRe.test(a.fecha), bi = isoRe.test(b.fecha);
+                if (ai && bi) return a.fecha < b.fecha ? -1 : (a.fecha > b.fecha ? 1 : 0);
+                return ai ? -1 : (bi ? 1 : 0);
+            });
+            const eventContainer = $('public-event-container');
+            if(eventContainer) {
+                eventContainer.innerHTML = evs.length ? evs.map(e => {
+                    const img = imgUrl(e.imagen);
+                    return `<div class="timeline-item">
+                        <span class="inline-block px-3 py-1 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs font-bold tracking-widest uppercase rounded mb-3">${esc(daysLabel(e.fecha))}</span>
+                        ${img ? `<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="w-full max-h-56 object-cover rounded-xl mb-3" onerror="this.remove()">` : ''}
+                        <h3 class="font-display text-2xl sm:text-3xl font-black text-brand-600 dark:text-brand-500 leading-tight mb-2">${esc(e.titulo)}</h3>
+                        <p class="text-sm font-bold text-gray-800 dark:text-gray-200 mb-1"><i class="ph ph-calendar-blank"></i> ${esc(fmtDate(e.fecha))}${e.lugar ? ` &nbsp;•&nbsp; <i class="ph ph-map-pin"></i> ${esc(e.lugar)}` : ''}</p>
+                        ${e.descripcion ? `<p class="text-gray-600 dark:text-gray-400 italic">${esc(e.descripcion)}</p>` : ''}
+                    </div>`;
+                }).join('') : '<div class="timeline-item"><p class="text-gray-500 dark:text-gray-400">No hay eventos próximos.</p></div>';
+            }
+
+            // Noticias
+            const newsContainer = $('public-news-container');
+            if(newsContainer) {
+                newsContainer.innerHTML = (data.noticias && data.noticias.length) ? data.noticias.map(n => {
+                    const img = imgUrl(n.imagen);
+                    return `<div class="border-b border-gray-100 dark:border-gray-700 pb-4 last:border-0 last:pb-0">
+                        ${img ? `<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="w-full max-h-44 object-cover rounded-xl mb-3" onerror="this.remove()">` : ''}
+                        <p class="text-brand-600 dark:text-brand-500 text-xs font-bold tracking-widest uppercase mb-1">${esc(fmtDate(n.fecha))}</p>
+                        <h3 class="font-bold text-lg text-gray-900 dark:text-white leading-snug mb-1">${esc(n.titulo)}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">${esc(n.contenido)}</p>
+                    </div>`;
+                }).join('') : '<p class="text-gray-500 dark:text-gray-400">No hay avisos.</p>';
+            }
+        }
+
+        // --- INFORMES ---
+        function switchTab(tabId) {
+            $('report-success').classList.add('hidden');
+            $('report-forms').classList.remove('hidden');$('report-type-cards').classList.remove('hidden');
+            const cel = tabId === 'tab-celula';
+            $('form-celula').classList.toggle('hidden', !cel);$('form-altar').classList.toggle('hidden', cel);
+            $('btn-tab-celula').classList.toggle('active', cel);$('btn-tab-altar').classList.toggle('active', !cel);
+            $('btn-tab-celula').setAttribute('aria-pressed', cel);$('btn-tab-altar').setAttribute('aria-pressed', !cel);
+        }
+
+        function stepNum(name, delta) {
+            const input = document.querySelector(`#form-celula [name="${name}"]`);
+            if(input) {
+                input.value = Math.max(0, (parseInt(input.value, 10) || 0) + delta);
+                updateTotal();
+            }
+        }
+        function updateTotal() {
+            const f = $('form-celula');
+            if(!f) return;
+            const a = parseInt(f.asistencia_adultos.value, 10) || 0;
+            const n = parseInt(f.asistencia_ninos.value, 10) || 0;
+            $('total-asistentes').textContent = a + n;
+        }
+        function initReportDefaults() {
+            document.querySelectorAll('#form-celula [name="fecha"], #form-altar [name="fecha"]').forEach(i => { i.value = todayISO(); });
+            updateTotal();
+        }
+        function resetReportView() {
+            $('report-success').classList.add('hidden');
+            $('report-forms').classList.remove('hidden');$('report-type-cards').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function submitReport(e, tipo) {
+            e.preventDefault();
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const data = getSafeFormData(form);
+
+            let rows;
+            if (tipo === 'Células') {
+                const total = (parseInt(data.asistencia_adultos, 10) || 0) + (parseInt(data.asistencia_ninos, 10) || 0);
+                rows = [['Fecha', fmtDate(data.fecha)], ['Líder', data.lider], ['Adultos', data.asistencia_adultos], ['Niños', data.asistencia_ninos], ['Total', total + ' personas'], ['Observaciones', data.observaciones || '—']];
+            } else {
+                rows = [['Fecha de inicio', fmtDate(data.fecha)], ['Familia', data.familia], ['Días realizados', data.dias], ['Peticiones/Testimonios', data.observaciones || '—']];
+            }
+            const body = '<p class="mb-3">Revisa que los datos estén correctos:</p><dl class="space-y-2">' +
+                rows.map(r => `<div class="flex justify-between gap-4 border-b border-gray-100 dark:border-gray-700 pb-1"><dt class="font-bold text-gray-500 dark:text-gray-400">${esc(r[0])}</dt><dd class="text-right text-gray-900 dark:text-white break-words max-w-[60%]">${esc(r[1])}</dd></div>`).join('') + '</dl>';
+
+            const ok = await askConfirm(`¿Enviar informe de ${tipo === 'Células' ? 'célula' : 'altar'}?`, body, 'Sí, enviar', false, 'Corregir');
+            if (!ok) return;
+
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="ph ph-spinner animate-spin text-lg"></i> Enviando...';
+            btn.disabled = true;
+            try {
+                await callBackend('saveReport', [tipo, data]);
+                form.reset();
+                initReportDefaults();
+                $('report-forms').classList.add('hidden');
+                $('report-type-cards').classList.add('hidden');$('report-success-text').textContent = `Tu informe de ${tipo === 'Células' ? 'célula' : 'altar familiar'} se guardó correctamente. ¡Gracias!`;
+                $('report-success').classList.remove('hidden');
+                showToast(`Informe de ${tipo} enviado`);
+            } catch (err) {
+                showToast(errMsg(err), 'error');
+            }
+            btn.innerHTML = orig; btn.disabled = false;
+        }
+
+        async function submitPrayer(e) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const data = getSafeFormData(e.target);
+            const orig = btn.innerHTML;
+            btn.innerHTML = '<i class="ph ph-spinner animate-spin text-lg"></i> Enviando...'; 
+            btn.disabled = true;
+            try {
+                await callBackend('savePrayer', [data]);
+                showToast("Petición enviada. Estaremos orando por ti.");
+                e.target.reset();
+                $('prayer-count').textContent = '0';
+            } catch (err) { showToast(errMsg(err), 'error'); }
+            btn.innerHTML = orig; btn.disabled = false;
+        }
+
+        // --- ADMIN ---
+        function togglePass() {
+            const i = $('admin-pass');
+            const show = i.type === 'password';
+            i.type = show ? 'text' : 'password';
+            $('pass-icon').className = show ? 'ph ph-eye-slash text-xl' : 'ph ph-eye text-xl';
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const btn = $('btn-login');
+            const u = $('admin-user').value;
+            const p = $('admin-pass').value;
+            btn.disabled = true; btn.textContent = 'Verificando...';
+            try {
+                const res = await callBackend('authenticate', [u, p]);
+                if (res && res.success) {
+                    isAdmin = true; adminToken = res.token;
+                    $('admin-pass').value = '';
+                    navigate('admin-panel');
+                    switchAdminTab('peticiones');
+                }
+            } catch (err) { showToast(errMsg(err), 'error'); }
+            btn.disabled = false; btn.textContent = 'Ingresar';
+        }
+
+        function logout(silent) {
+            isAdmin = false; adminToken = null;
+            navigate('home');
+            if (!silent) showToast('Sesión cerrada');
+        }
+
+        const ADMIN_TABS = {
+            noticias:   { label: 'Noticias', icon: 'ph-newspaper', kind: 'content', singular: 'noticia', help: 'Avisos que se muestran en la página de inicio.' },
+            eventos:    { label: 'Eventos', icon: 'ph-calendar-star', kind: 'content', singular: 'evento', help: 'Solo los eventos "Publicados" se ven en la página pública.' },
+            peticiones: { label: 'Oración', icon: 'ph-hands-praying', kind: 'prayer', help: 'Peticiones recibidas. Marca las que ya fueron atendidas.' },
+            celulas:    { label: 'Células', icon: 'ph-users-three', kind: 'table', help: 'Informes de células enviados por los líderes.' },
+            altares:    { label: 'Altares', icon: 'ph-house-line', kind: 'table', help: 'Informes de altares familiares.' }
+        };
+        const FIELDS = {
+            eventos: ['id', 'titulo', 'fecha', 'lugar', 'imagen', 'descripcion', 'estado'],
+            noticias: ['id', 'titulo', 'fecha', 'imagen', 'contenido']
+        };
+        const rowToObj = (t, r) => { const o = {}; FIELDS[t].forEach((k, i) => { o[k] = r[i] == null ? '' : r[i]; }); o.id = r[0]; return o; };
+        const adminState = { type: 'peticiones', header: [], rows: [] };
+
+        function initAdminTabs() {
+            $('admin-tabs').innerHTML = Object.keys(ADMIN_TABS).map(t =>
+                `<button onclick="switchAdminTab('${t}')" id="admin-tab-${t}" class="px-5 py-4 text-sm font-bold uppercase tracking-wider text-gray-400 border-b-2 border-transparent whitespace-nowrap flex items-center gap-2"><i class="ph ${ADMIN_TABS[t].icon} text-lg"></i>${ADMIN_TABS[t].label}</button>`
+            ).join('');
+        }
+
+        async function switchAdminTab(tipo) {
+            window.currentAdminTabType = tipo;
+            adminState.type = tipo; adminState.rows = []; adminState.header = [];
+            const cfg = ADMIN_TABS[tipo];
+
+            Object.keys(ADMIN_TABS).forEach(t => {
+                const el = $(`admin-tab-${t}`);
+                if (el) el.className = "px-5 py-4 text-sm font-bold uppercase tracking-wider border-b-2 whitespace-nowrap flex items-center gap-2 " + (t === tipo ? "text-brand-600 border-brand-600" : "text-gray-400 border-transparent hover:text-gray-700 dark:hover:text-gray-200");
+            });
+
+            $('admin-form-wrapper').classList.add('hidden');
+            $('admin-search').value = '';$('admin-action-title').textContent = cfg.label;
+            $('admin-action-help').textContent = cfg.help;
+            const addBtn = $('admin-add-btn');
+            addBtn.classList.toggle('hidden', cfg.kind !== 'content');
+            if (cfg.kind === 'content') $('admin-add-label').textContent = `Nuevo ${cfg.singular}`;
+
+            $('admin-summary').innerHTML = '';$('admin-list').innerHTML = '<div class="text-center py-10 text-gray-500 dark:text-gray-400"><i class="ph ph-spinner animate-spin text-2xl"></i><p class="mt-2 text-sm">Cargando...</p></div>';
+
+            try {
+                const data = await callBackend('getAdminData', [adminToken, tipo]);
+                if (tipo !== adminState.type) return;
+                adminState.header = (data && data[0]) || [];
+                adminState.rows = (data || []).slice(1);
+                renderAdmin();
+            } catch (e) {
+                if (/denegado/i.test(errMsg(e))) { logout(true); showToast('Tu sesión expiró. Ingresa de nuevo.', 'error'); return; }
+                $('admin-list').innerHTML = `<div class="text-center py-10"><p class="text-sm text-gray-500 dark:text-gray-400 mb-3">No se pudieron cargar los datos.</p><button onclick="switchAdminTab('${tipo}')" class="btn btn-ghost btn-sm"><i class="ph ph-arrow-clockwise"></i> Reintentar</button></div>`;
+            }
+        }
+
+        function summaryHtml(t, rows) {
+            const stat = (label, value) => `<div class="stat"><p class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">${label}</p><p class="font-display text-2xl font-black text-brand-600 dark:text-brand-500">${value}</p></div>`;
+            const num = v => parseInt(v, 10) || 0;
+            if (t === 'peticiones') {
+                const pend = rows.filter(r => r[4] !== 'Atendida').length;
+                return stat('Total', rows.length) + stat('Pendientes', pend) + stat('Atendidas', rows.length - pend);
+            }
+            if (t === 'celulas') {
+                const tot = rows.reduce((s, r) => s + num(r[5]), 0);
+                return stat('Informes', rows.length) + stat('Asistentes', tot) + stat('Promedio', rows.length ? Math.round(tot / rows.length) : 0);
+            }
+            if (t === 'altares') {
+                const fam = new Set(rows.map(r => (r[2] || '').trim().toLowerCase()).filter(Boolean)).size;
+                return stat('Informes', rows.length) + stat('Familias', fam) + stat('Días sumados', rows.reduce((s, r) => s + num(r[3]), 0));
+            }
+            if (t === 'eventos') {
+                const drafts = rows.filter(r => r[6] === 'Borrador').length;
+                return stat('Total', rows.length) + stat('Publicados', rows.length - drafts) + stat('Borradores', drafts);
+            }
+            return stat('Total', rows.length);
+        }
+
+        function badgeHtml(estado) {
+            if (estado === 'Borrador') return '<span class="badge badge-gray"><i class="ph-fill ph-eye-slash"></i> Borrador</span>';
+            if (estado === 'Atendida') return '<span class="badge badge-green"><i class="ph-fill ph-check-circle"></i> Atendida</span>';
+            if (estado === 'Pendiente') return '<span class="badge badge-amber"><i class="ph-fill ph-clock"></i> Pendiente</span>';
+            return '<span class="badge badge-green"><i class="ph-fill ph-globe"></i> Publicado</span>';
+        }
+
+        function renderAdmin() {
+            const t = adminState.type, cfg = ADMIN_TABS[t];
+            const q = ($('admin-search').value || '').toLowerCase().trim();
+            const all = adminState.rows;
+            const rows = q ? all.filter(r => r.join(' ').toLowerCase().includes(q)) : all;
+            $('admin-summary').innerHTML = summaryHtml(t, all);
+            const list = $('admin-list');
+
+            if (!rows.length) {
+                list.innerHTML = `<div class="text-center py-12 text-gray-500 dark:text-gray-400"><i class="ph ph-tray text-4xl"></i><p class="mt-2">${q ? 'No hay resultados para tu búsqueda.' : 'Aún no hay registros.'}</p></div>`;
+                return;
+            }
+
+            if (cfg.kind === 'content') {
+                list.innerHTML = '<div class="space-y-3">' + rows.map(r => {
+                    const o = rowToObj(t, r);
+                    const estado = t === 'eventos' ? (o.estado === 'Borrador' ? 'Borrador' : 'Publicado') : '';
+                    const img = imgUrl(o.imagen);
+                    const meta = t === 'eventos' ? [fmtDate(o.fecha), o.lugar] : [fmtDate(o.fecha)];
+                    const body = o.descripcion || o.resumen || o.contenido || '';
+                    return `<article class="admin-card">
+                        ${img ? `<img src="${esc(img)}" alt="" loading="lazy" referrerpolicy="no-referrer" class="hidden sm:block w-24 h-24 object-cover rounded-xl flex-none" onerror="this.remove()">` : ''}
+                        <div class="flex-1 min-w-0">
+                            <div class="flex flex-wrap items-center gap-2 mb-1">
+                                <h3 class="font-bold text-gray-900 dark:text-white break-words">${esc(o.titulo)}</h3>
+                                ${estado ? badgeHtml(estado) : ''}
+                            </div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">${meta.filter(Boolean).map(esc).join(' • ')}</p>
+                            ${body ? `<p class="text-sm text-gray-600 dark:text-gray-300 mt-1 line-clamp-2">${esc(body)}</p>` : ''}
+                            <div class="flex flex-wrap gap-2 mt-3">
+                                <button data-act="edit" data-id="${esc(o.id)}" class="btn btn-ghost btn-sm"><i class="ph ph-pencil-simple"></i> Editar</button>
+                                ${t === 'eventos' ? `<button data-act="toggle" data-id="${esc(o.id)}" data-estado="${estado === 'Borrador' ? 'Publicado' : 'Borrador'}" class="btn btn-ghost btn-sm"><i class="ph ${estado === 'Borrador' ? 'ph-globe' : 'ph-eye-slash'}"></i> ${estado === 'Borrador' ? 'Publicar' : 'Pasar a borrador'}</button>` : ''}
+                                <button data-act="delete" data-id="${esc(o.id)}" class="btn btn-danger btn-sm"><i class="ph ph-trash"></i> Eliminar</button>
+                            </div>
+                        </div>
+                    </article>`;
+                }).join('') + '</div>';
+            } else if (cfg.kind === 'prayer') {
+                list.innerHTML = '<div class="space-y-3">' + rows.map(r => {
+                    const done = r[4] === 'Atendida';
+                    return `<article class="admin-card flex-col">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <div><p class="font-bold text-gray-900 dark:text-white">${esc(r[1])}</p><p class="text-xs text-gray-500 dark:text-gray-400">${esc(r[0])}${r[2] && r[2] !== 'N/A' ? ' • ' + esc(r[2]) : ''}</p></div>
+                            ${badgeHtml(done ? 'Atendida' : 'Pendiente')}
+                        </div>
+                        <p class="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line break-words">${esc(r[3])}</p>
+                        <div><button data-act="prayer" data-row="${esc(r[5])}" data-estado="${done ? 'Pendiente' : 'Atendida'}" class="btn ${done ? 'btn-ghost' : 'btn-primary'} btn-sm"><i class="ph ${done ? 'ph-arrow-counter-clockwise' : 'ph-check'}"></i> ${done ? 'Reabrir' : 'Marcar como atendida'}</button></div>
+                    </article>`;
+                }).join('') + '</div>';
+            } else {
+                const head = adminState.header.map(h => `<th class="px-4 py-3 text-left text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider whitespace-nowrap">${esc(h)}</th>`).join('');
+                const body = rows.map(r => '<tr class="hover:bg-gray-50 dark:hover:bg-gray-800">' + r.map(c => `<td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 align-top max-w-[260px] break-words">${esc(c)}</td>`).join('') + '</tr>').join('');
+                list.innerHTML = `<div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700"><table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"><thead class="bg-gray-50 dark:bg-gray-800"><tr>${head}</tr></thead><tbody class="divide-y divide-gray-200 dark:divide-gray-700">${body}</tbody></table></div>`;
+            }
+        }
+
+        // Acciones de las tarjetas (delegación de eventos)
+        $('admin-list').addEventListener('click', async ev => {
+            const b = ev.target.closest('[data-act]');
+            if (!b) return;
+            const t = adminState.type, id = b.dataset.id;
+            if (b.dataset.act === 'edit') {
+                const row = adminState.rows.find(r => r[0] === id);
+                if (row) openAdminForm(rowToObj(t, row));
+            } else if (b.dataset.act === 'toggle') {
+                try {
+                    await callBackend('setContentStatus', [adminToken, t, id, b.dataset.estado]);
+                    showToast(b.dataset.estado === 'Publicado' ? 'Evento publicado' : 'Evento pasado a borrador');
+                    switchAdminTab(t);
+                } catch (err) { showToast(errMsg(err), 'error'); }
+            } else if (b.dataset.act === 'delete') {
+                deleteAdminRecord(id, t);
+            } else if (b.dataset.act === 'prayer') {
+                try {
+                    await callBackend('setPrayerStatus', [adminToken, b.dataset.row, b.dataset.estado]);
+                    showToast(b.dataset.estado === 'Atendida' ? 'Petición marcada como atendida' : 'Petición reabierta');
+                    switchAdminTab(t);
+                } catch (err) { showToast(errMsg(err), 'error'); }
+            }
+        });
+
+        function toggleAdminForm() {
+            const wrapper = $('admin-form-wrapper');
+            if (!wrapper.classList.contains('hidden')) { wrapper.classList.add('hidden'); return; }
+            openAdminForm(null);
+        }
+
+        function openAdminForm(rec) {
+            const wrapper = $('admin-form-wrapper');
+            const tipo = window.currentAdminTabType;
+            const cfg = ADMIN_TABS[tipo];
+            if (cfg.kind !== 'content') return;
+            const r = rec || {};
+            const v = k => esc(r[k] || '');
+            const editing = !!rec;
+            let fields = '';
+
+            if (tipo === 'eventos') {
+                const legacy = r.fecha && !isoRe.test(r.fecha) ? r.fecha : '';
+                fields = `
+                    <div><label class="lbl">Título *</label><input type="text" name="titulo" required maxlength="150" value="${v('titulo')}" class="field"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="lbl">Fecha ${legacy ? '' : '*'}</label>
+                            <input type="date" name="fecha" ${legacy ? '' : 'required'} value="${isoRe.test(r.fecha || '') ? esc(r.fecha) : ''}" class="field">
+                            ${legacy ? `<input type="hidden" name="__legacy" value="${esc(legacy)}"><p class="hint">Fecha actual: ${esc(legacy)}. Déjalo vacío para mantenerla.</p>` : ''}
+                        </div>
+                        <div><label class="lbl">Lugar *</label><input type="text" name="lugar" required maxlength="150" value="${v('lugar')}" class="field"></div>
+                    </div>
+                    <div><label class="lbl">Imagen (enlace, opcional)</label><input type="url" name="imagen" value="${v('imagen')}" placeholder="https://..." class="field"><p class="hint">Puedes pegar un enlace de imagen o de Google Drive (compartido como "Cualquiera con el enlace").</p></div>
+                    <div><label class="lbl">Descripción</label><textarea name="descripcion" rows="3" maxlength="1000" class="field">${v('descripcion')}</textarea></div>
+                    <div>
+                        <label class="lbl">Estado</label>
+                        <select name="estado" class="field">
+                            <option value="Publicado" ${r.estado !== 'Borrador' ? 'selected' : ''}>Publicado (visible en la página)</option>
+                            <option value="Borrador" ${r.estado === 'Borrador' ? 'selected' : ''}>Borrador (oculto)</option>
+                        </select>
+                    </div>`;
+            } else {
+                fields = `
+                    <div><label class="lbl">Título *</label><input type="text" name="titulo" required maxlength="150" value="${v('titulo')}" class="field"></div>
+                    <div><label class="lbl">Fecha *</label><input type="text" name="fecha" required maxlength="50" value="${v('fecha')}" placeholder="Ej. 20 Oct" class="field"></div>
+                    <div><label class="lbl">Imagen (enlace, opcional)</label><input type="url" name="imagen" value="${v('imagen')}" placeholder="https://..." class="field"></div>
+                    <div><label class="lbl">Contenido *</label><textarea name="contenido" required rows="4" maxlength="1500" class="field">${v('contenido')}</textarea></div>`;
+            }
+
+            wrapper.innerHTML = `
+                <form onsubmit="submitAdminContent(event, '${tipo}')" class="max-w-2xl space-y-4">
+                    <p class="font-display text-lg font-black text-gray-900 dark:text-white">${editing ? 'Editar' : 'Nuevo'} ${cfg.singular}</p>
+                    <input type="hidden" name="__id" value="${editing ? esc(r.id) : ''}">
+                    ${fields}
+                    <div class="flex flex-wrap gap-3 pt-2">
+                        <button type="submit" class="btn btn-primary"><i class="ph ph-floppy-disk text-lg"></i> ${editing ? 'Guardar cambios' : 'Guardar'}</button>
+                        <button type="button" onclick="$('admin-form-wrapper').classList.add('hidden')" class="btn btn-ghost">Cancelar</button>
+                    </div>
+                </form>`;
+            wrapper.classList.remove('hidden');
+            wrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        async function submitAdminContent(e, tipo) {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const fd = getSafeFormData(e.target);
+            const id = fd.__id; delete fd.__id;
+            if (tipo === 'eventos' && !fd.fecha && fd.__legacy) fd.fecha = fd.__legacy;
+            delete fd.__legacy;
+            const orig = btn.innerHTML;
+            btn.disabled = true; btn.innerHTML = '<i class="ph ph-spinner animate-spin text-lg"></i> Guardando...';
+            try {
+                if (id) await callBackend('updateAdminContent', [adminToken, tipo, id, fd]);
+                else await callBackend('saveAdminContent', [adminToken, tipo, fd]);
+                showToast(id ? 'Cambios guardados' : 'Guardado correctamente');
+                $('admin-form-wrapper').classList.add('hidden');
+                switchAdminTab(tipo);
+            } catch (err) {
+                showToast(errMsg(err), 'error');
+                btn.disabled = false; btn.innerHTML = orig;
+            }
+        }
+
+        async function deleteAdminRecord(id, tipo) {
+            const ok = await askConfirm('¿Eliminar este registro?', 'Se borrará de forma permanente y dejará de verse en la página. Esta acción no se puede deshacer.', 'Sí, eliminar', true);
+            if (!ok) return;
+            try {
+                await callBackend('deleteAdminContent', [adminToken, tipo, id]);
+                showToast('Registro eliminado');
+                switchAdminTab(tipo);
+            } catch (err) { showToast(errMsg(err), 'error'); }
+        }
+
+        // --- TUTORIAL DE BIENVENIDA ---
+        const TOUR_STEPS = [
+            { view: 'home', icon: 'ph-hand-waving', title: '¡Bienvenido!', text: 'Este es el portal de la Iglesia de Dios de la Profecía en Chinandega. Te mostramos en un minuto cómo usarlo. Puedes omitir el tutorial cuando quieras.', targets: [] },
+            { view: 'home', icon: 'ph-house', title: 'Inicio', text: 'Aquí ves los próximos eventos y las noticias y anuncios de la iglesia.', targets: ['#home-info'] },
+            { view: 'home', icon: 'ph-compass', title: 'Cómo moverte', text: 'Usa el menú para ir a Inicio, Informes, Oración o al acceso administrativo. En el celular está en la parte de abajo.', targets: ['#nav-desktop', '#bottom-nav'] },
+            { view: 'reports', icon: 'ph-clipboard-text', title: 'Informes: elige el tipo', text: 'Toca "Célula" o "Altar Familiar" según el informe que vas a enviar.', targets: ['#report-type-cards'] },
+            { view: 'reports', icon: 'ph-pencil-line', title: 'Informes: llena y envía', text: 'Completa los datos (los campos con * son obligatorios). Al enviar, verás un resumen para revisar y confirmar antes de guardar.', targets: ['#report-forms'] },
+            { view: 'prayer', icon: 'ph-hands-praying', title: 'Oración', text: 'Comparte tu petición de oración. Puedes enviarla sin nombre y será confidencial.', targets: ['#view-prayer form'] },
+            { view: 'home', icon: 'ph-lock-key', title: 'Administración', text: 'El candado es para personal autorizado: ahí se publican noticias y eventos, y se consultan las peticiones y los informes recibidos.', targets: ['#nav-desktop a[data-nav="admin"]', '#bottom-nav [data-nav="admin"]'] },
+            { view: 'home', icon: 'ph-check-circle', title: '¡Listo!', text: 'Ya conoces lo básico. Si necesitas repasar, toca el signo de interrogación (?) en cualquier momento.', targets: [] }
+        ];
+        let tourIndex = 0, tourTarget = null;
+        const isVisible = el => el && el.getClientRects().length > 0;
+
+        function clearTourHighlight() {
+            if (tourTarget) { tourTarget.classList.remove('tour-highlight'); tourTarget = null; }
+        }
+        function startTour() { tourIndex = 0; $('tour').classList.remove('hidden'); renderTour(); }
+        function endTour() { clearTourHighlight(); $('tour').classList.add('hidden'); }
+        function tourNext() { if (tourIndex >= TOUR_STEPS.length - 1) { endTour(); return; } tourIndex++; renderTour(); }
+        function tourPrev() { if (tourIndex > 0) { tourIndex--; renderTour(); } }
+
+        function renderTour() {
+            const s = TOUR_STEPS[tourIndex];
+            clearTourHighlight();
+            if (s.view && s.view !== currentView) navigate(s.view);
+            $('tour-step').textContent = `Paso ${tourIndex + 1} de ${TOUR_STEPS.length}`;
+            $('tour-icon').className = `ph-fill ${s.icon} text-2xl text-brand-600 dark:text-brand-500`;
+            $('tour-title').textContent = s.title;
+            $('tour-text').textContent = s.text;
+            $('tour-dots').innerHTML = TOUR_STEPS.map((_, i) => `<span class="tour-dot ${i === tourIndex ? 'on' : ''}"></span>`).join('');
+            $('tour-prev').classList.toggle('invisible', tourIndex === 0);
+            const last = tourIndex === TOUR_STEPS.length - 1;
+            $('tour-next').innerHTML = last ? '<i class="ph ph-check"></i> Finalizar' : 'Siguiente <i class="ph ph-arrow-right"></i>';
+            setTimeout(() => {
+                if (TOUR_STEPS[tourIndex] !== s || $('tour').classList.contains('hidden')) return;
+                for (const sel of s.targets) {
+                    const el = document.querySelector(sel);
+                    if (isVisible(el)) {
+                        tourTarget = el;
+                        el.classList.add('tour-highlight');
+                        const fixed = el.closest('nav');
+                        if (!fixed) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        break;
+                    }
+                }
+            }, 350);
+        }
+
+        document.addEventListener('keydown', ev => {
+            if (ev.key === 'Escape') {
+                if (!$('confirm-modal').classList.contains('hidden')) closeConfirm(false);
+                else if (!$('tour').classList.contains('hidden')) endTour();
+            }
+            if (!$('tour').classList.contains('hidden') &&$('confirm-modal').classList.contains('hidden') && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) {
+                if (ev.key === 'ArrowRight') tourNext();
+                if (ev.key === 'ArrowLeft') tourPrev();
+            }
+        });
+
+        // Compatibilidad con Google Apps Script (sandbox IFRAME): evita que los formularios
+        // recarguen la página o naveguen a una página en blanco. También cubre formularios
+        // creados dinámicamente en el panel administrativo; no bloquea sus manejadores onsubmit.
+        document.addEventListener('submit', function (event) {
+            event.preventDefault();
+        }, true);
+
+        window.addEventListener('load', () => {
+            initTheme();
+            formatCurrentDate();
+            initAdminTabs();
+            initReportDefaults();
+            setActiveNav('home');
+            loadPublicData();
+            setTimeout(startTour, 900); // Se muestra cada vez que alguien entra al sistema
+        });
+    </script>
+</body>
+</html>
